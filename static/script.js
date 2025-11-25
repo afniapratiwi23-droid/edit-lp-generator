@@ -213,10 +213,16 @@ async function generateRedesign() {
         try {
             const apiKey = key;
             const style = styleSelect.value;
+            const customPrompt = document.getElementById('customStylePrompt').value;
             const rewriteCopywriting = document.getElementById('rewriteCopywriting').checked;
 
             if (!apiKey) {
                 showError('API Key belum diisi! Klik icon gear di pojok kanan atas.');
+                return false;
+            }
+
+            if (style === 'custom' && !customPrompt.trim()) {
+                showError('Silakan isi deskripsi style custom Anda!');
                 return false;
             }
 
@@ -227,6 +233,7 @@ async function generateRedesign() {
                 html: htmlInput,
                 api_key: apiKey,
                 style: style,
+                custom_prompt: customPrompt,
                 rewrite_copywriting: rewriteCopywriting
             };
 
